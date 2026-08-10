@@ -219,3 +219,71 @@ input[type="radio"] { accent-color: var(--accent); }
 
 /* ---------- Tabela ---------- */
 table { font-variant-numeric: tabular-nums; }
+
+/* ---------- Sinal de "estou trabalhando" ----------
+   Dono, 10/08/2026: *"às vezes demora uns segundos para trocar de tela ou
+   carregar um filtro"*. Sem sinal, a tela fica parada e o usuário clica de
+   novo — ou acha que travou. */
+
+/* Barra fina no topo durante a navegação. Fica no topo de tudo (z acima do
+   header sticky) e não desloca nada, porque é fixed. */
+.barra-carregando {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 100;
+  background: transparent;
+  pointer-events: none;
+}
+.barra-carregando::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent));
+  transform-origin: 0 50%;
+  animation: ocsi-barra 1.4s ease-in-out infinite;
+}
+@keyframes ocsi-barra {
+  0%   { transform: scaleX(0);   opacity: 1; }
+  60%  { transform: scaleX(0.75); opacity: 1; }
+  100% { transform: scaleX(1);   opacity: 0.2; }
+}
+
+/* Ícone giratório para carregamento LOCAL (filtro, tabela, botão). Herda a cor
+   do texto onde está, então serve em cima de qualquer fundo. */
+.spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: ocsi-gira 0.7s linear infinite;
+}
+.spinner-lg { width: 28px; height: 28px; border-width: 3px; }
+
+@keyframes ocsi-gira {
+  to { transform: rotate(360deg); }
+}
+
+/* Bloco de "carregando" no lugar do conteúdo (lista/tabela vazia enquanto
+   busca). Centralizado e discreto — não compete com o conteúdo que vai chegar. */
+.carregando-bloco {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 24px;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+/* Quem respeita "menos movimento" recebe o sinal sem animação. */
+@media (prefers-reduced-motion: reduce) {
+  .barra-carregando::before { animation: none; transform: scaleX(1); opacity: 0.6; }
+  .spinner { animation-duration: 2s; }
+}

@@ -30,7 +30,9 @@
     "./lib/tema": "./lib/tema.ts",
     "./temas/omnivis.css": "./temas/omnivis.css",
     "./react/tabela-padrao": "./react/tabela-padrao.ts",
-    "./react-next/voltar": "./react-next/voltar.tsx"
+    "./react/carregando": "./react/carregando.tsx",
+    "./react-next/voltar": "./react-next/voltar.tsx",
+    "./react-next/indicador-navegacao": "./react-next/indicador-navegacao.tsx"
   },
   "peerDependencies": {
     "next": ">=14",
