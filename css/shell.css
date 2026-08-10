@@ -1,0 +1,123 @@
+/* ===========================================================================
+   @ocsi/ui — SHELL (header full-width + sidebar + conteúdo)
+
+   A moldura do sistema: header que atravessa a tela, sidebar à esquerda, e só
+   o conteúdo rolando. Copiado do gabarito (saas-gestao/app/globals.css).
+
+   O RG já tinha convergido para estas mesmas classes por conta própria (a
+   estrutura `.painel-*` estava quase linha a linha igual, só com os nomes de
+   token trocados) — este arquivo torna essa coincidência oficial.
+   =========================================================================== */
+.painel-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.painel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.painel-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.painel-hamburger {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.painel-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+.painel-main {
+  flex: 1;
+  min-width: 0;
+  padding: 32px 40px;
+}
+
+/* Largura PADRÃO única do conteúdo: toda página ocupa a tela até este teto. */
+.painel-main > * {
+  max-width: 1480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.painel-overlay {
+  display: none;
+}
+
+/* ---------- Itens de navegação da sidebar (trilho e submenu) ---------- */
+.sb-item {
+  background: transparent;
+  color: var(--text-dim);
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.sb-item:hover:not(.sb-ativo) {
+  background: var(--surface-2);
+  color: var(--text);
+}
+.sb-item.sb-ativo {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: var(--accent-contrast);
+  box-shadow: 0 6px 16px var(--accent-shadow);
+}
+
+/* ---------------------------------------------------------------------------
+   CABEÇALHO DE PÁGINA — faixa com moldura: título + explicação à esquerda,
+   ações à direita. Padrão do dono (07/08/2026), vale para TODA tela do painel.
+--------------------------------------------------------------------------- */
+.cabecalho-pagina {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 18px 22px;
+  margin: 0 0 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fio da marca à esquerda — assina a faixa sem pesar. */
+.cabecalho-pagina::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+}

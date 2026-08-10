@@ -1,0 +1,103 @@
+/* ===========================================================================
+   TEMA — RG Ambiental
+   Verde da marca, claro por padrão e escuro conforme a preferência do sistema.
+
+   Valores extraídos de rg-ambiental/app/globals.css.
+
+   ⚠️ DUAS RESPONSABILIDADES AQUI:
+
+   1. Dar valor aos tokens do CONTRATO (--text, --border, --text-dim…), que é o
+      que faz `css/base.css` sair verde neste produto.
+
+   2. Manter vivos os nomes ANTIGOS do RG (--ink, --line, --soft, --faint,
+      --input-border, --shadow-card). Centenas de regras do app ainda os usam;
+      apagá-los de uma vez apagaria a cor de metade das telas. Eles ficam como
+      APELIDOS dos tokens do contrato, e vão sendo removidos tela a tela.
+      Quando `grep -r "var(--ink)"` no rg-ambiental não achar mais nada, o
+      bloco "compatibilidade" abaixo pode sumir.
+   =========================================================================== */
+:root {
+  /* ---- Contrato ---- */
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --border: #e2e8f0;
+  --input-bg: #ffffff;
+  --text: #0f172a;
+  --text-dim: #475569;
+
+  --accent: #16a34a;
+  --accent-2: #12823b;          /* o RG já usava este tom cravado no .sb-item */
+  --accent-soft: #f0fdf4;
+  --accent-contrast: #ffffff;
+  --accent-shadow: rgba(22, 163, 74, 0.28);
+  --glow: rgba(22, 163, 74, 0.06);
+
+  --danger: #dc2626;            /* o RG tinha #dc2626 e #b91c1c para a MESMA
+                                   ideia em skins diferentes; unificado aqui */
+  --ok: #16a34a;
+  --warn: #d97706;
+
+  --chip-ok-bg: #e7f7ed;      --chip-ok-fg: #12823b;
+  --chip-danger-bg: #fdecec;  --chip-danger-fg: #b91c1c;
+  --chip-warn-bg: #fdf1e3;    --chip-warn-fg: #9a5b0d;
+  --chip-neutro-bg: #eef2f7;  --chip-neutro-fg: #55637a;
+  --chip-info-bg: #e8f1fd;    --chip-info-fg: #1d4ed8;
+
+  --kpi-entrada: #60a5fa;
+  --kpi-realizado: #4ade80;
+  --kpi-saida: #ec4899;
+  --kpi-vencido: #fbbf24;
+
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 20px rgba(15, 23, 42, 0.04);
+
+  /* ---- Compatibilidade: nomes antigos do RG (remover ao fim da migração) ---- */
+  --ink: var(--text);
+  --soft: var(--text-dim);
+  --faint: #64748b;
+  --line: var(--border);
+  --input-border: #cbd5e1;
+  --shadow-card: var(--shadow);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1120;
+    --surface: #0f172a;
+    --surface-2: #1e293b;
+    --border: #26334a;
+    --input-bg: #0f172a;
+    --text: #e8eef7;
+    --text-dim: #aebccd;
+
+    --accent: #22c55e;
+    --accent-2: #16a34a;
+    --accent-soft: #12261c;
+    --accent-contrast: #05210f;   /* verde claro pede texto ESCURO em cima:
+                                     branco sobre #22c55e não passa contraste */
+    --accent-shadow: rgba(34, 197, 94, 0.28);
+    --glow: rgba(34, 197, 94, 0.07);
+
+    --danger: #f87171;
+    --ok: #4ade80;
+    --warn: #fbbf24;
+
+    --chip-ok-bg: #12261c;      --chip-ok-fg: #4ade80;
+    --chip-danger-bg: #2c1414;  --chip-danger-fg: #fca5a5;
+    --chip-warn-bg: #2e2412;    --chip-warn-fg: #fbbf24;
+    --chip-neutro-bg: #1e293b;  --chip-neutro-fg: #94a3b8;
+    --chip-info-bg: #12233f;    --chip-info-fg: #93c5fd;
+
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+
+    --faint: #8595a8;
+    --input-border: #334155;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}

@@ -1,0 +1,62 @@
+/* ===========================================================================
+   @ocsi/ui — CONTRATO DE TOKENS
+
+   Este arquivo define os NOMES. Os VALORES vêm do tema do produto
+   (`temas/saas.css`, `temas/rg.css`) — é isso que deixa o SaaS laranja e o RG
+   verde usando exatamente o mesmo `.btn`.
+
+   Os valores abaixo são um fallback NEUTRO: se um produto esquecer de importar
+   um tema, a interface sai em cinza legível em vez de quebrar. Nenhum produto
+   deve rodar só com isto.
+
+   ⚠️ REGRA: `css/base.css` e `css/shell.css` só podem usar `var(--token)`.
+   Cor literal dentro deles congela a marca e é exatamente o que este pacote
+   existe para impedir.
+
+   Como o RG chegava aqui com outros nomes (`--ink`, `--line`, `--soft`,
+   `--faint`, `--shadow-card`), o tema dele traduz os antigos para estes — ver
+   `temas/rg.css`.
+   =========================================================================== */
+:root {
+  /* ---- Superfícies ---- */
+  --bg: #f7f7f8;              /* fundo da página */
+  --surface: #ffffff;         /* cartão, header, sidebar */
+  --surface-2: #eef0f3;       /* botão neutro, hover, faixa */
+  --border: #dfe2e8;          /* toda borda e divisória */
+  --input-bg: #ffffff;        /* fundo de campo */
+
+  /* ---- Texto ---- */
+  --text: #1a1c22;            /* texto principal */
+  --text-dim: #6b7180;        /* texto secundário (.muted) */
+
+  /* ---- Marca (é AQUI que o produto se diferencia) ---- */
+  --accent: #5b6caf;          /* cor da marca */
+  --accent-2: #46567f;        /* segundo tom, para gradientes */
+  --accent-soft: rgba(91, 108, 175, 0.16); /* anel de foco, zebra */
+  --accent-contrast: #ffffff; /* texto SOBRE o accent */
+  --accent-shadow: rgba(91, 108, 175, 0.35);
+  --glow: rgba(91, 108, 175, 0.10);
+
+  /* ---- Semânticas (não seguem a marca: significam sempre a mesma coisa) ---- */
+  --danger: #d92d20;
+  --ok: #129a5b;
+  --warn: #b7791f;
+
+  /* ---- Selos de status ---- */
+  --chip-ok-bg: #e6f6ee;      --chip-ok-fg: #0f7a48;
+  --chip-danger-bg: #fdeceb;  --chip-danger-fg: #b42318;
+  --chip-warn-bg: #fdf3e2;    --chip-warn-fg: #9c6212;
+  --chip-neutro-bg: #eef0f3;  --chip-neutro-fg: #5c6270;
+  --chip-info-bg: #e8f1fd;    --chip-info-fg: #175cd3;
+
+  /* ---- KPI (fixas por semântica em TODOS os produtos) ---- */
+  --kpi-entrada: #60a5fa;
+  --kpi-realizado: #4ade80;
+  --kpi-saida: #ec4899;
+  --kpi-vencido: #fbbf24;
+
+  /* ---- Forma ---- */
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 10px 30px rgba(15, 18, 32, 0.08);
+}

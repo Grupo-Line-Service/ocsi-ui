@@ -1,0 +1,53 @@
+{
+  "name": "@ocsi/ui",
+  "version": "0.1.0",
+  "description": "Núcleo compartilhado dos produtos OCSI: contrato visual (tokens + classes), componentes de tela e utilitários. Mudou aqui, mudou em todos.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grupo-Line-Service/ocsi-ui.git"
+  },
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "css",
+    "temas",
+    "lib",
+    "react",
+    "docs"
+  ],
+  "exports": {
+    "./css/tokens.css": "./css/tokens.css",
+    "./css/base.css": "./css/base.css",
+    "./css/shell.css": "./css/shell.css",
+    "./temas/saas.css": "./temas/saas.css",
+    "./temas/rg.css": "./temas/rg.css",
+    "./lib/contatos-cliente": "./lib/contatos-cliente.ts",
+    "./lib/cnpj-lookup": "./lib/cnpj-lookup.ts",
+    "./lib/formato": "./lib/formato.ts",
+    "./react/voltar": "./react/voltar.tsx",
+    "./react/tabela-padrao": "./react/tabela-padrao.ts"
+  },
+  "peerDependencies": {
+    "next": ">=14",
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.31",
+    "next": "^14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "ocsi",
+    "design-system"
+  ]
+}

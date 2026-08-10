@@ -1,0 +1,53 @@
+/* ===========================================================================
+   TEMA — SaaS Gestão (OCSI)
+   Navy profundo + laranja da marca. Tema único, sem alternância clara/escura.
+
+   Valores extraídos de saas-gestao/app/globals.css. Trocar a marca do produto
+   = trocar SÓ este arquivo.
+   =========================================================================== */
+:root {
+  --bg: #0e1026;
+  --surface: #171a36;
+  --surface-2: #1f2347;
+  --border: #2b2f55;
+  --input-bg: rgba(10, 12, 32, 0.55);
+  --text: #eef0fb;
+  --text-dim: #9ba3c7;
+
+  --accent: #c2691c;
+  --accent-2: #9f5617;
+  --accent-soft: rgba(194, 105, 28, 0.16);
+  --accent-contrast: #ffffff;
+  --accent-shadow: rgba(194, 105, 28, 0.35);
+  --glow: rgba(194, 105, 28, 0.10);
+
+  --danger: #f472b6;
+  --ok: #34d399;
+  --warn: #fbbf24;
+
+  --chip-ok-bg: #14351f;      --chip-ok-fg: #4ade80;
+  --chip-danger-bg: #3b1127;  --chip-danger-fg: #f9a8d4;
+  --chip-warn-bg: #3a2a12;    --chip-warn-fg: #fbbf24;
+  --chip-neutro-bg: #26324a;  --chip-neutro-fg: #9aa7bd;
+  --chip-info-bg: #12233f;    --chip-info-fg: #93c5fd;
+
+  --kpi-entrada: #60a5fa;
+  --kpi-realizado: #4ade80;
+  --kpi-saida: #ec4899;
+  --kpi-vencido: #fbbf24;
+
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 10px 30px rgba(5, 6, 20, 0.35);
+}
+
+/* Fundo com os dois halos da marca — assinatura visual do SaaS. */
+html,
+body {
+  background:
+    radial-gradient(1200px 820px at 4% -8%, var(--glow), transparent 55%),
+    radial-gradient(1000px 720px at 100% 108%, var(--glow), transparent 55%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+}
