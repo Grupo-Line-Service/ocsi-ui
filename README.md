@@ -90,6 +90,13 @@ Consulte antes de escrever qualquer componente de tela: a chance de já existir
 5. **Mudou aqui? Vale para os dois.** Antes de alterar uma medida, lembre que
    ela vai aparecer no SaaS e no RG no próximo deploy.
 
+## Produto novo? Comece pelo starter
+
+Não instale este pacote na mão num projeto em branco: use
+**[ocsi-starter](https://github.com/Grupo-Line-Service/ocsi-starter)**
+("Use this template"). Ele já vem com o núcleo instalado, white-label,
+autenticação, isolamento no banco e CI.
+
 ## Quem usa
 
 | Produto | Tema | Situação |
