@@ -91,6 +91,55 @@
   box-shadow: 0 6px 16px var(--accent-shadow);
 }
 
+/* ---------- Shell fixo (dono, 05/08/2026): cabeçalho E menu acompanham ------
+   No desktop a JANELA não rola: o shell ocupa 100dvh e só o .painel-main tem
+   scroll. Menu sempre à mão em página longa; sticky interno (o thead do padrão
+   extrato) passa a grudar logo abaixo do cabeçalho. Mobile segue com gaveta. */
+@media (min-width: 821px) {
+  .painel-root {
+    height: 100vh;
+    height: 100dvh;
+  }
+  .painel-body {
+    overflow: hidden;
+  }
+  .painel-main {
+    overflow-y: auto;
+  }
+}
+
+/* ---------- Mobile: a sidebar vira gaveta ---------- */
+@media (max-width: 820px) {
+  .painel-hamburger {
+    display: inline-flex;
+  }
+  .painel-main {
+    padding: 20px 16px;
+  }
+  .painel-sidebar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100vh !important;
+    width: 288px !important;
+    min-width: 288px !important;
+    transform: translateX(-100%);
+    z-index: 60;
+    padding-top: 16px !important;
+  }
+  .painel-sidebar.aberta {
+    transform: translateX(0);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.55);
+  }
+  .painel-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 55;
+  }
+}
+
 /* ---------------------------------------------------------------------------
    CABEÇALHO DE PÁGINA — faixa com moldura: título + explicação à esquerda,
    ações à direita. Padrão do dono (07/08/2026), vale para TODA tela do painel.
