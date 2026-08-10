@@ -23,8 +23,23 @@ temas/rg.css            →  --accent: #16a34a   (verde RG)     ─────�
 ## Como usar
 
 ```bash
-npm install github:Grupo-Line-Service/ocsi-ui
+npm install "https://github.com/Grupo-Line-Service/ocsi-ui/archive/refs/heads/main.tar.gz"
 ```
+
+⚠️ **Instale pelo TARBALL, não pelo atalho `github:`.** O npm normaliza
+`github:owner/repo` para `git+ssh://git@github.com/...` no lockfile — e a
+Vercel não tem chave SSH do GitHub, então o build quebra no deploy mesmo com o
+repositório sendo público. O tarball baixa por HTTPS puro, sem git e sem
+credencial, e ainda grava um hash de integridade no lock.
+
+**Para atualizar** um produto depois de mudar o pacote:
+
+```bash
+npm update @ocsi/ui
+```
+
+O hash no lockfile fixa a versão de propósito: a mudança chega quando o produto
+pede, não no meio de um deploy que era sobre outra coisa.
 
 No `app/globals.css` do produto, **nesta ordem** (o tema precisa vir depois do
 contrato para poder sobrescrevê-lo):
