@@ -1,0 +1,92 @@
+/* ===========================================================================
+   TEMA — Omnivis (rastreamento e vídeo)
+   Rosa da marca + navy. Tema único claro (o bloco `[data-theme="dark"]` que
+   existe no styles.css deles nunca chegou a ser ativado por código).
+
+   Valores extraídos de omnivis/web/src/styles.css.
+
+   ⚠️ DUAS RESPONSABILIDADES, como no tema do RG:
+
+   1. Dar valor aos tokens do CONTRATO — é o que faz `css/base.css` sair rosa
+      neste produto.
+
+   2. Manter vivos os nomes ANTIGOS do Omnivis (em português: --rosa, --texto,
+      --card, --linha, --raio…). As 1792 linhas do styles.css deles usam esses
+      nomes; apagá-los de uma vez apagaria a cor do app inteiro. Ficam como
+      APELIDOS e vão saindo tela a tela.
+
+   ⚠️ DIFERENÇA IMPORTANTE em relação ao RG: o Omnivis NÃO TEM `.btn` nem
+   `.input`. Cada tela estiliza o próprio botão (`button.primary`,
+   `button.ghost`) e o próprio campo. Adotar o pacote aqui não é TROCAR classe,
+   é GANHAR uma camada base que nunca existiu — o `.card` e o `.muted` deles já
+   são primos próximos, o resto é novo.
+   =========================================================================== */
+:root {
+  /* ---- Contrato ---- */
+  --bg: #faf7f8;
+  --surface: #ffffff;
+  --surface-2: #f4f1f3;         /* o Omnivis usava rgba(34,48,79,.04) solto em
+                                   dezenas de regras; aqui vira token */
+  --border: rgba(34, 48, 79, 0.08);
+  --input-bg: #ffffff;
+  --text: #22304f;
+  --text-dim: rgba(34, 48, 79, 0.6);
+
+  --accent: #e63384;            /* rosa da marca */
+  --accent-2: #b21e68;
+  --accent-soft: rgba(230, 51, 132, 0.12);
+  --accent-contrast: #ffffff;
+  --accent-shadow: rgba(230, 51, 132, 0.35);
+  --glow: rgba(230, 51, 132, 0.08);
+
+  --danger: #e23b3b;
+  --ok: #1f9d55;
+  --warn: #f0b429;
+
+  --chip-ok-bg: #e7f6ee;      --chip-ok-fg: #1a7a44;
+  --chip-danger-bg: #fdecec;  --chip-danger-fg: #b52626;
+  --chip-warn-bg: #fdf4e3;    --chip-warn-fg: #96690d;
+  --chip-neutro-bg: #f0eef1;  --chip-neutro-fg: #5a6580;
+  --chip-info-bg: #e8eef8;    --chip-info-fg: #2b5896;
+
+  --kpi-entrada: #60a5fa;
+  --kpi-realizado: #4ade80;
+  --kpi-saida: #ec4899;
+  --kpi-vencido: #fbbf24;
+
+  --radius: 16px;               /* o Omnivis usa 16 no card (--raio-card) */
+  --radius-sm: 10px;            /* e 10 no resto (--raio) */
+  --shadow: 0 2px 10px rgba(34, 48, 79, 0.06);
+
+  /* ---- Compatibilidade: nomes antigos (remover ao fim da migração) ---- */
+  --rosa: var(--accent);
+  --rosa-escuro: var(--accent-2);
+  --rosa-tint: #fce4ef;
+  --navy: #1a2540;
+  --texto: var(--text);
+  --card: var(--surface);
+  --linha: var(--border);
+  --sucesso: var(--ok);
+  --erro: var(--danger);
+  --aviso: var(--warn);
+  --info: #2b5896;
+  --online: #5fd99a;            /* marcado como legado no próprio styles.css */
+  --raio: var(--radius-sm);
+  --raio-card: var(--radius);
+  --raio-pill: 999px;
+  --sombra-sm: var(--shadow);
+  --sombra-md: 0 8px 24px rgba(34, 48, 79, 0.10);
+  --glow-rosa: 0 8px 20px -6px rgba(230, 51, 132, 0.5);
+  --grad-rosa: linear-gradient(135deg, var(--accent), var(--accent-2));
+  --grad-navy: linear-gradient(135deg, #1a2540, #22304f);
+
+  /* Tipografia da marca Omnivis (Montserrat + DM Sans) — os outros produtos
+     usam a própria; por isso fica no TEMA, não no contrato. */
+  --fonte-titulo: "Montserrat", system-ui, sans-serif;
+  --fonte-texto: "DM Sans", system-ui, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}

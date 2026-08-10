@@ -27,14 +27,22 @@
     "./lib/contatos-cliente": "./lib/contatos-cliente.ts",
     "./lib/cnpj-lookup": "./lib/cnpj-lookup.ts",
     "./lib/formato": "./lib/formato.ts",
-    "./react/voltar": "./react/voltar.tsx",
-    "./react/tabela-padrao": "./react/tabela-padrao.ts"
+    "./lib/tema": "./lib/tema.ts",
+    "./temas/omnivis.css": "./temas/omnivis.css",
+    "./react/tabela-padrao": "./react/tabela-padrao.ts",
+    "./react-next/voltar": "./react-next/voltar.tsx"
   },
   "peerDependencies": {
     "next": ">=14",
     "react": ">=18"
   },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    }
+  },
   "devDependencies": {
+    "@types/node": "^26.2.0",
     "@types/react": "^18.3.31",
     "next": "^14.2.35",
     "react": "^18.3.1",

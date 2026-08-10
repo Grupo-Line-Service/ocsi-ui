@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -63,7 +63,13 @@ describe("contrato visual", () => {
   it("todo tema cobre o contrato inteiro (nenhum produto fica com buraco)", () => {
     const doContrato = [...ler("css/tokens.css").matchAll(/^\s*(--[a-z0-9-]+)\s*:/gim)].map((m) => m[1]);
 
-    for (const tema of ["temas/saas.css", "temas/rg.css"]) {
+    // Lista os temas da PASTA, não de uma lista fixa: tema de produto novo
+    // entra na verificação sozinho, sem ninguém lembrar de adicionar aqui.
+    // (A lista fixa já tinha deixado o tema do Omnivis passar sem checagem.)
+    const temas = readdirSync(join(raiz, "temas")).filter((f) => f.endsWith(".css")).map((f) => `temas/${f}`);
+    expect(temas.length, "nenhum tema encontrado em temas/").toBeGreaterThan(0);
+
+    for (const tema of temas) {
       const definidos = new Set(
         [...ler(tema).matchAll(/^\s*(--[a-z0-9-]+)\s*:/gim)].map((m) => m[1]),
       );
