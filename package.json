@@ -1,6 +1,6 @@
 {
   "name": "@ocsi/ui",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Núcleo compartilhado dos produtos OCSI: contrato visual (tokens + classes), componentes de tela e utilitários. Mudou aqui, mudou em todos.",
   "license": "MIT",
   "repository": {
@@ -17,7 +17,8 @@
     "lib",
     "react",
     "react-next",
-    "docs"
+    "docs",
+    "fontes"
   ],
   "exports": {
     "./css/tokens.css": "./css/tokens.css",
@@ -33,7 +34,8 @@
     "./react/tabela-padrao": "./react/tabela-padrao.ts",
     "./react/carregando": "./react/carregando.tsx",
     "./react-next/voltar": "./react-next/voltar.tsx",
-    "./react-next/indicador-navegacao": "./react-next/indicador-navegacao.tsx"
+    "./react-next/indicador-navegacao": "./react-next/indicador-navegacao.tsx",
+    "./fontes/fontes.css": "./fontes/fontes.css"
   },
   "peerDependencies": {
     "next": ">=14",
