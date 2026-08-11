@@ -27,16 +27,31 @@ export function Voltar({ href, rotulo }: { href: string; rotulo: string }) {
   const [temHistorico, setTemHistorico] = useState(false);
 
   useEffect(() => {
-    // Duas fontes, nesta ordem:
-    // 1. Navigation API (Chrome/Edge) — sabe de verdade se dá para voltar;
-    // 2. contador de telas desta aba, mantido pelo AppShell (funciona em
-    //    qualquer navegador). >= 1 = alguma tela foi visitada antes desta.
-    // As DUAS condições precisam valer:
-    //  a) o app registrou navegação interna nesta aba (contador do AppShell) —
-    //     sem isso, "voltar" sairia do sistema (ex.: cheguei pelo Google);
-    //  b) o navegador confirma que dá para voltar (Navigation API do
-    //     Chrome/Edge; onde ela não existe, assume-se que sim).
+    // Precisamos saber se houve navegação DENTRO do app nesta aba. Sem isso,
+    // "voltar" jogaria o usuário para fora do sistema (cheguei pelo Google).
+    //
+    // ⚠️ LIÇÃO PAGA (11/08/2026): a v0.3.0 lia SÓ o contador `telas-visitadas`,
+    // que é escrito pelo AppShell do PRODUTO. O pacote levou o LEITOR e deixou
+    // o ESCRITOR para trás — no RG Ambiental o contador nunca existiu, então
+    // `temHistorico` era sempre false e o Voltar caía no href fixo: editando um
+    // cliente, a seta levava para a LISTA em vez de voltar para a ficha dele.
+    // Peça de núcleo que depende do produto lembrar de fazer algo NÃO é peça de
+    // núcleo — é armadilha. Agora a fonte primária é do próprio Next.
+    //
+    // 1. `history.state.idx` — o App Router numera as entradas que ELE criou
+    //    nesta aba. Carreguei o app direto: idx = 0. Naveguei uma vez por
+    //    dentro: idx >= 1. Não depende de nenhuma cooperação do produto.
+    // 2. contador `telas-visitadas` do AppShell — mantido como reserva, para
+    //    quem já o escreve e para versão de Next que mude o campo interno.
+    // 3. Navigation API (Chrome/Edge) confirma que o passo existe de verdade.
+    let idx = 0;
     let internas = 0;
+    try {
+      const estado = window.history.state as { idx?: number } | null;
+      idx = typeof estado?.idx === "number" ? estado.idx : 0;
+    } catch {
+      idx = 0;
+    }
     try {
       internas = Number(sessionStorage.getItem("telas-visitadas") ?? "0");
     } catch {
@@ -44,7 +59,7 @@ export function Voltar({ href, rotulo }: { href: string; rotulo: string }) {
     }
     const nav = (window as { navigation?: { canGoBack?: boolean } }).navigation;
     const navegadorPermite = typeof nav?.canGoBack === "boolean" ? nav.canGoBack : true;
-    setTemHistorico(internas >= 1 && navegadorPermite);
+    setTemHistorico((idx >= 1 || internas >= 1) && navegadorPermite);
   }, []);
 
   const conteudo = (
