@@ -66,7 +66,8 @@ isso.
 | Ação secundária dentro de um bloco (34px) | `.btn btn-chip` |
 | Botão só ícone (círculo) | `.btn btn-icone` |
 | Barra do Salvar (linha + respiro) | `.barra-acao` |
-| Cartão | `.card` (com `<a class="card">` levanta no hover) |
+| Cartão | `.card` (`<a class="card">`/`<button class="card">` levantam no hover) |
+| Clicável | `.clicavel` — QUALQUER elemento clicável (tile, linha, chip solto) ganha hover/foco na cor da marca; `.clicavel-plano` só muda o fundo (linhas de tabela/menu). Regra: se clica, avisa. |
 | Campo de formulário | `.input` |
 | Texto secundário | `.muted` |
 | Abas + busca na mesma linha | `.barra-filtros`, `-chips`, `-busca` |

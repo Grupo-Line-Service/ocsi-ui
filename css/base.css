@@ -17,19 +17,27 @@
   box-shadow: var(--shadow);
 }
 
-/* Micro-interação padrão: todo card CLICÁVEL levanta no hover, na cor da marca.
-   Links com .card ganham de graça. */
-a.card {
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+/* Micro-interação padrão: TUDO que é clicável AVISA no hover, na cor da marca
+   (dono, 16/08/2026: "passa o mouse em cima não tem efeito nenhum, nem parece
+   um botão"). Links/botões com .card ganham de graça; qualquer outro elemento
+   clicável (tile, linha, chip solto) recebe `.clicavel`. */
+a.card, button.card, .card[role="link"], .card[role="button"], .clicavel {
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
-a.card:hover {
+a.card:hover, button.card:hover, .card[role="link"]:hover, .card[role="button"]:hover, .clicavel:hover,
+a.card:focus-visible, button.card:focus-visible, .clicavel:focus-visible {
   transform: translateY(-2px);
   border-color: var(--accent);
   box-shadow: 0 10px 26px color-mix(in srgb, var(--accent) 16%, transparent);
+  outline: none;
 }
+/* Variante sem levantar (linhas de tabela/lista, itens de menu): só a cor. */
+.clicavel-plano { cursor: pointer; transition: background 0.12s ease, color 0.12s ease; }
+.clicavel-plano:hover, .clicavel-plano:focus-visible { background: var(--accent-soft); outline: none; }
 @media (prefers-reduced-motion: reduce) {
-  a.card { transition: none; }
-  a.card:hover { transform: none; }
+  a.card, button.card, .clicavel { transition: none; }
+  a.card:hover, button.card:hover, .clicavel:hover { transform: none; }
 }
 
 /* ---------- Botões ----------
@@ -55,8 +63,12 @@ a.card:hover {
   white-space: nowrap;
   transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
 }
-.btn:hover { background: var(--border); }
+/* Hover VISÍVEL: cor da marca na borda e no texto + fundo suave (o antigo
+   "background: var(--border)" some no tema claro — parecia que nada acontecia). */
+.btn:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .btn:active { transform: translateY(1px); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; transform: none; }
 
 /* Ícone dentro do botão nunca estica nem encolhe a caixa. */
 .btn svg { width: 16px; height: 16px; flex: 0 0 auto; }
