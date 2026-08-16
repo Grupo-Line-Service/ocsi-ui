@@ -81,6 +81,8 @@ a.card:focus-visible, button.card:focus-visible, .clicavel:focus-visible {
 }
 .btn-primary:hover {
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+  color: var(--accent-contrast); /* v0.6.1: .btn:hover pintava o texto na cor da marca — laranja sobre laranja, "botão selecionado fica estranho" (dono, 16/08) */
   filter: brightness(1.08);
 }
 

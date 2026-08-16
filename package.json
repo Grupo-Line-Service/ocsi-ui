@@ -1,6 +1,6 @@
 {
   "name": "@ocsi/ui",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Núcleo compartilhado dos produtos OCSI: contrato visual (tokens + classes), componentes de tela e utilitários. Mudou aqui, mudou em todos.",
   "license": "MIT",
   "repository": {
