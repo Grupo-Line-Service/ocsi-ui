@@ -14,9 +14,11 @@ import { useRouter } from "next/navigation";
  * um índice no history state), a seta desfaz o passo — o usuário volta para a
  * tela de onde veio, seja ela qual for. Sem histórico (link aberto direto,
  * aba nova, e-mail), cai no `href` que a tela declara, que é o destino
- * natural daquela ficha. O texto é SEMPRE "Voltar" — um verbo só, um
- * comportamento só; dois "voltares" concorrentes na mesma tela (a seta e um
- * link "voltar ao resumo") foi exatamente o que confundiu o dono em 07/08.
+ * natural daquela ficha. O texto ERA sempre "Voltar" — e em 08/09/2026 o dono
+ * tirou o TEXTO: ficou só a seta, e *"isso se aplica para todo lugar"*. O que a
+ * regra de 07/08 resolveu continua de pé: UM voltar por tela, voltando UMA
+ * tela; dois "voltares" concorrentes (a seta e um link "voltar ao resumo") foi
+ * exatamente o que confundiu o dono naquele dia.
  *
  * Visual: bola no ACCENT do tema com seta branca — o fio de volta da casa.
  */
@@ -62,27 +64,45 @@ export function Voltar({ href, rotulo }: { href: string; rotulo: string }) {
     setTemHistorico((idx >= 1 || internas >= 1) && navegadorPermite);
   }, []);
 
+  /*
+    🔴 SÓ A SETA, SEM O TEXTO (dono, 08/09/2026, com o print e o texto riscado:
+    *"retirar o texto voltar e colocar apenas a seta no meio do modal"* ·
+    *"exatamente essas alterações visuais são das telas do sistema, isso se
+    aplica para todo lugar"*).
+
+    ⚠️ ISTO SUBSTITUI a decisão dele de 07/08/2026, que estava escrita aqui e no
+    CLAUDE.md dos dois produtos: *"o texto é SEMPRE 'Voltar' — um verbo só, um
+    comportamento só"*. O que aquela regra resolveu CONTINUA valendo e não mudou:
+    **um único Voltar por tela, voltando UMA tela**. O que saiu foi o rótulo.
+
+    🔴 O NOME NÃO SUMIU — ele foi para o `title` e o `aria-label`. Um botão só
+    com desenho não diz nada para leitor de tela nem no hover, e a seta sozinha
+    já é a convenção universal de voltar.
+  */
   const conteudo = (
-    <>
-      <span aria-hidden style={bola}>
-        <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
-          <path d="M19 12H5" />
-          <path d="M12 19l-7-7 7-7" />
-        </svg>
-      </span>
-      Voltar
-    </>
+    <span aria-hidden style={bola}>
+      <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M19 12H5" />
+        <path d="M12 19l-7-7 7-7" />
+      </svg>
+    </span>
   );
 
   if (temHistorico) {
     return (
-      <button type="button" onClick={() => router.back()} style={{ ...link, background: "none", border: "none", padding: 0, cursor: "pointer" }} title="Voltar para a tela anterior">
+      <button
+        type="button"
+        onClick={() => router.back()}
+        style={{ ...link, background: "none", border: "none", padding: 0, cursor: "pointer" }}
+        title="Voltar para a tela anterior"
+        aria-label="Voltar para a tela anterior"
+      >
         {conteudo}
       </button>
     );
   }
   return (
-    <Link href={href} style={link} title={`Voltar para ${rotulo}`}>
+    <Link href={href} style={link} title={`Voltar para ${rotulo}`} aria-label={`Voltar para ${rotulo}`}>
       {conteudo}
     </Link>
   );
@@ -91,7 +111,8 @@ export function Voltar({ href, rotulo }: { href: string; rotulo: string }) {
 const link: React.CSSProperties = {
   display: "inline-flex",
   alignItems: "center",
-  gap: 10,
+  // Sem o texto ao lado, o `gap` só criaria área clicável vazia à direita.
+  gap: 0,
   fontWeight: 700,
   fontSize: 14,
   color: "var(--text)",
