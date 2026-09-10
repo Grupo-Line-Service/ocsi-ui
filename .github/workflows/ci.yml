@@ -1,0 +1,42 @@
+name: CI
+
+# Por que este arquivo existe (10/09/2026).
+#
+# O @ocsi/ui tinha `typecheck` e `test` no package.json desde sempre -- e NADA
+# os executava: o repositorio nao tinha nenhum workflow. Portao que ninguem
+# chama nao e portao, e este pacote e PUBLICO e alimenta cinco produtos, entao
+# um defeito daqui nasce cinco vezes.
+#
+# ⚠️ Nao ha `build`: este pacote nao empacota nada. Ele e consumido por TAG
+# (`archive/refs/tags/vX.Y.Z.tar.gz`) e serve o proprio fonte -- css, temas,
+# lib, react e react-next saem como estao. A prova de que ele compila e o
+# `typecheck`; a de que ele funciona sao os testes.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  qualidade:
+    name: lint + typecheck + testes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Checagem de tipos
+        run: npm run typecheck
+
+      - name: Testes
+        run: npm test
