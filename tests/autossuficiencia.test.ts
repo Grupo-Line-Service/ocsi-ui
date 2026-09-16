@@ -35,10 +35,18 @@ const raiz = join(dirname(fileURLToPath(import.meta.url)), "..");
  * sendo apenas RESERVA: se ela sumir, o componente ainda decide certo sozinho.
  */
 const RESERVAS_PERMITIDAS: Record<string, string> = {
-  "telas-visitadas":
-    "Reserva do AppShell. A fonte primária do Voltar é history.state.idx, " +
-    "do próprio App Router, que não depende de cooperação do produto.",
+  // (vazio de propósito — ver abaixo)
 };
+
+/*
+ * 16/09/2026 — O ESCRITOR VOLTOU PARA CASA.
+ *
+ * `telas-visitadas` era a reserva citada acima: o pacote LIA (no `Voltar`) e
+ * quem ESCREVIA era o AppShell, que morava em cada produto. Com a
+ * `MolduraPainel` publicada no núcleo (v0.8.0), o pacote escreve e lê a mesma
+ * chave — a dependência invisível acabou, e por isso a lista de reservas ficou
+ * VAZIA. Ela continua aqui para a próxima reserva ter onde ser justificada.
+ */
 
 /** Todos os .ts/.tsx publicados como código do pacote. */
 function fontes(dir: string, achados: string[] = []): string[] {
@@ -103,6 +111,35 @@ describe("autossuficiência do núcleo", () => {
     // porque a instalação é por tarball do repositório inteiro.
     for (const pasta of ["lib", "react", "react-next", "css", "temas"]) {
       expect(pkg.files, `"${pasta}" precisa estar em files[] do package.json`).toContain(pasta);
+    }
+  });
+});
+
+/*
+ * A MOLDURA É DO NÚCLEO (v0.8.0) — guardas do contrato que ela trouxe.
+ */
+describe("moldura do painel", () => {
+  const moldura = readFileSync(join(raiz, "react-next/moldura-painel.tsx"), "utf8");
+  const menu = readFileSync(join(raiz, "react-next/menu-lateral.tsx"), "utf8");
+
+  it("a moldura ESCREVE a chave que o Voltar lê — nenhum produto precisa lembrar", () => {
+    expect(chaves(semComentarios(moldura), "setItem")).toContain("telas-visitadas");
+  });
+
+  it("todo arquivo de react-next é importável (está em exports)", () => {
+    const pkg = JSON.parse(readFileSync(join(raiz, "package.json"), "utf8")) as { exports: Record<string, string> };
+    const publicados = new Set(Object.values(pkg.exports));
+    for (const arquivo of fontes("react-next")) {
+      const caminho = "./" + arquivo.split("\\").join("/");
+      expect(publicados.has(caminho), `${caminho} não está em exports — ninguém consegue importar`).toBe(true);
+    }
+  });
+
+  it("o menu não decide permissão: os itens chegam por prop", () => {
+    // Regra pública × privada: pacote público não sabe o que é módulo, cargo
+    // nem organização. Se um dia souber, vazou regra de negócio para cá.
+    for (const proibido of ["organizacao", "modulo", "cargo", "permissao", "admin"]) {
+      expect(semComentarios(menu).toLowerCase()).not.toContain(proibido);
     }
   });
 });

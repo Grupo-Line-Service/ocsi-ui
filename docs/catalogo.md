@@ -92,3 +92,13 @@ apresentação × dados, vira item deste catálogo:
 - `SeletorBusca` — escolher cliente/produto com busca
 - `CabecalhoPagina` — título + descrição + ações (o CSS já está aqui)
 - `AppShell`, `AccountMenu`, `CentralAvisos` — importam Supabase e actions
+
+## Moldura do painel e menu (v0.8.0)
+
+| Peça | Import | O que é |
+|---|---|---|
+| `MolduraPainel` | `@ocsi/ui/react-next/moldura-painel` | Cabeçalho full-width + menu lateral + área de conteúdo, com a gaveta do mobile e o contador que o `Voltar` lê. Slots `acoes` (avisos) e `conta` (menu da conta). |
+| `MenuLateral` | `@ocsi/ui/react-next/menu-lateral` | O menu, com ícone, item ativo no gradiente da marca e submenu com seta. Os itens chegam por prop, já filtrados pelo SERVIDOR do produto. |
+| `Icone` + `IC_*` | `@ocsi/ui/react-next/icone` | Ícone de traço 20px em `currentColor`. ⚠️ **Nada de emoji em menu**: cor própria e desenho diferente por sistema fazem dois produtos do grupo parecerem de empresas diferentes. |
+
+**Ícone de domínio** (câmera, veículo, totem, nota) mora no produto; aqui ficam os que qualquer produto tem.
