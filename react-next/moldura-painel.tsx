@@ -26,6 +26,9 @@ export function MolduraPainel({
   produtoNome,
   logoUrl,
   menu,
+  modoSubmenu,
+  larguraMenu,
+  rodapeSubmenu,
   acoes,
   conta,
   children,
@@ -35,6 +38,11 @@ export function MolduraPainel({
   produtoNome?: string;
   logoUrl?: string | null;
   menu: ItemMenu[];
+  /** "trilho" = menu grande (SaaS); "acordeao" = menu curto (padrão). */
+  modoSubmenu?: "acordeao" | "trilho";
+  larguraMenu?: number;
+  /** Pé do submenu aberto — slot do produto (assinatura, versão). */
+  rodapeSubmenu?: ReactNode;
   acoes?: ReactNode;
   conta?: ReactNode;
   children: ReactNode;
@@ -47,7 +55,9 @@ export function MolduraPainel({
   // nova abre no meio — o scroller é o <main>, não a janela.
   useEffect(() => {
     setGaveta(false);
-    main.current?.scrollTo({ top: 0 });
+    // Os DOIS eixos: a planilha rolada para a direita deixava a tela nova
+    // começando no meio quando só o topo era reposto.
+    main.current?.scrollTo({ top: 0, left: 0 });
   }, [pathname]);
 
   // Contador de telas visitadas nesta aba: é o que permite ao botão Voltar
@@ -114,7 +124,14 @@ export function MolduraPainel({
       </header>
 
       <div className="painel-body">
-        <MenuLateral itens={menu} aberta={gaveta} />
+        <MenuLateral
+          itens={menu}
+          aberta={gaveta}
+          modoSubmenu={modoSubmenu}
+          largura={larguraMenu}
+          rodapeSubmenu={rodapeSubmenu}
+          aoNavegar={() => setGaveta(false)}
+        />
         {gaveta && <div className="painel-overlay" onClick={() => setGaveta(false)} />}
         <main className="painel-main" ref={main}>
           {children}

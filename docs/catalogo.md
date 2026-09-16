@@ -93,7 +93,7 @@ apresentação × dados, vira item deste catálogo:
 - `CabecalhoPagina` — título + descrição + ações (o CSS já está aqui)
 - `AppShell`, `AccountMenu`, `CentralAvisos` — importam Supabase e actions
 
-## Moldura do painel e menu (v0.8.0)
+## Moldura do painel e menu (v0.8.0 · trilho na v0.9.0)
 
 | Peça | Import | O que é |
 |---|---|---|
@@ -102,3 +102,19 @@ apresentação × dados, vira item deste catálogo:
 | `Icone` + `IC_*` | `@ocsi/ui/react-next/icone` | Ícone de traço 20px em `currentColor`. ⚠️ **Nada de emoji em menu**: cor própria e desenho diferente por sistema fazem dois produtos do grupo parecerem de empresas diferentes. |
 
 **Ícone de domínio** (câmera, veículo, totem, nota) mora no produto; aqui ficam os que qualquer produto tem.
+
+### Os dois modos de submenu (v0.9.0)
+
+`MenuLateral` aceita `modoSubmenu`:
+
+- **`"acordeao"`** (padrão) — o submenu abre no lugar. Serve a menu curto.
+- **`"trilho"`** — o menu principal encolhe para uma faixa de ícones e o submenu abre ao lado, com
+  título de grupo. É o desenho do SaaS, onde uma seção tem 16 filhos. A largura total não muda, então
+  a área de conteúdo não pula.
+
+Item aceita `grupos` (seções com título), `aoClicar` (age em vez de navegar), `noRodape` (vai para o
+pé, atrás do traço), `dica` (título e nome acessível) e `id` (chave estável).
+
+**Três regras vieram do SaaS e têm teste** (`tests/menu-lateral.test.ts`): link direto do topo vence a
+seção que tem item parecido dentro; acende o filho de `href` MAIS LONGO; e a seção **segue a rota** —
+sem isso o menu para de acompanhar a navegação, que foi o defeito da v0.8.0.
