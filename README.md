@@ -113,6 +113,13 @@ sobre si mesmo.
 > `package.json` dentro dela dizia `0.6.1`. Quem consumia a `v0.7.0` via `0.6.1`
 > no `npm ls` e no lockfile. A correção foi a `v0.7.1`, com o mesmo código.
 
+> ⚠️ **MEDIDO em 16/09/2026: a tag `v0.7.0` mente.** O `package.json` dentro dela diz `0.6.1` — quem
+> instala "v0.7.0" recebe 0.6.1 (é o caso do `saas-gestao` hoje). É exatamente a armadilha descrita
+> logo acima, e nenhum teste da casa a pega. **Não mova a tag**: ela já está em lockfile alheio. O
+> conserto é uma tag NOVA, e a adoção é decisão de quem manda em cada produto. Conferir sempre com
+> `git show vX.Y.Z:package.json | grep version` antes de confiar numa tag.
+
+
 ## Produto novo? Comece pelo starter
 
 Não instale este pacote na mão num projeto em branco: use
