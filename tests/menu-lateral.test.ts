@@ -58,3 +58,24 @@ describe("menu lateral — as regras de acender e abrir", () => {
     expect(estaDentro("/painel", MENU[4])).toBe(false);
   });
 });
+
+/*
+ * Guarda do defeito de 17/09: um `background` inline no item do menu VENCE o
+ * `.sb-ativo` do shell.css e apaga o gradiente da marca — o texto branco do
+ * item ativo some. Quem pinta o fundo é a classe, nunca estilo inline.
+ */
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
+
+describe("menu lateral — o fundo é da classe, não inline", () => {
+  it("estiloItem NÃO define background (senão mata o .sb-ativo)", () => {
+    const raiz = join(dirname(fileURLToPath(import.meta.url)), "..");
+    const src = readFileSync(join(raiz, "react-next/menu-lateral.tsx"), "utf8");
+    const m = src.match(/const estiloItem[\s\S]*?\}\);/);
+    expect(m, "achou o estiloItem").not.toBe(null);
+    // Tira comentários antes de checar — a explicação do porquê cita "background".
+    const semComentarios = m![0].replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
+    expect(/\bbackground\s*:/.test(semComentarios), "estiloItem não pode ter background inline").toBe(false);
+  });
+});

@@ -114,7 +114,11 @@ const estiloItem = (recuo: boolean): CSSProperties => ({
   fontSize: recuo ? 13 : 14,
   width: "100%",
   border: "none",
-  background: "none",
+  // ⚠️ SEM `background` inline: quem pinta o fundo é o `.sb-item`/`.sb-ativo` do
+  // shell.css (transparente no normal, gradiente da marca no ativo). Um
+  // `background: none` inline VENCE o CSS e apagava o gradiente do item ativo —
+  // o texto (branco, do `.sb-ativo`) ficava invisível. Achado do dono, 17/09.
+  // O `<button>` já é resetado pelo `.sb-item { background: transparent }`.
   font: "inherit",
   textAlign: "left",
   cursor: "pointer",
