@@ -113,6 +113,11 @@
   .painel-hamburger {
     display: inline-flex;
   }
+  /* No celular o nome da empresa (+ produto) sai do cabeçalho: sobra o ☰, o logo
+     e a conta, sem espremer. Espelha o SaaS (dono, 17/09). */
+  .painel-marca {
+    display: none;
+  }
   .painel-main {
     padding: 20px 16px;
   }
