@@ -226,3 +226,14 @@ Duas frentes seguidas: **entregue as duas e documente as duas juntas**, em vez d
 intercalar documentação entre elas.
 
 <!-- OCSI:GOVERNANCA:FIM -->
+
+## 🔴 A cópia tem MÃO ÚNICA (lei do dono, 16/09/2026)
+
+*"Em hipótese nenhuma modificar o SaaS por causa de nenhum outro sistema, sempre o contrário: os
+outros sistemas copiam o SaaS Gestão e vão herdar a aparência e funções dele."*
+
+- Peça nova aqui **nasce copiando o SaaS** e é adotada pelos OUTROS produtos.
+- **Nunca** se mexe no `saas-gestao` para servir a este pacote, nem "só para ficar igual", nem com
+  teste verde e pré-visualização. O SaaS adota quando o dono quiser, como trabalho DELE.
+- Mudança de pacote que **exigiria** editar o SaaS para valer está errada por construção: refaça a
+  peça para que o SaaS continue como está.
