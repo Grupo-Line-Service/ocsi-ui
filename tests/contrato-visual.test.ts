@@ -79,3 +79,19 @@ describe("contrato visual", () => {
     }
   });
 });
+
+/*
+ * Alinhamento do topo (dono, 17/09): `.painel-main > *` centraliza cada filho
+ * com `margin: auto`. Um filho que fixa `margin: 0 0 X` (esquerda/direita = 0)
+ * vence esse auto e fica ENCOSTADO à esquerda, enquanto a tabela abaixo fica
+ * centralizada — em tela larga (>1480px) a tabela desloca para a direita. O
+ * cabeçalho tem que centralizar igual: `margin: 0 auto ...`.
+ */
+it("o .cabecalho-pagina centraliza (margin auto), não encosta à esquerda", () => {
+  const shell = readFileSync(join(raiz, "css/shell.css"), "utf8");
+  const m = shell.match(/\.cabecalho-pagina\s*\{[\s\S]*?\}/);
+  expect(m, "achou o .cabecalho-pagina").not.toBe(null);
+  const margin = m![0].match(/margin:\s*([^;]+);/);
+  expect(margin, ".cabecalho-pagina tem margin").not.toBe(null);
+  expect(/\bauto\b/.test(margin![1]), `margin deve ter 'auto' (é "${margin?.[1]}")`).toBe(true);
+});
