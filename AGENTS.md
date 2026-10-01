@@ -227,13 +227,26 @@ intercalar documentação entre elas.
 
 <!-- OCSI:GOVERNANCA:FIM -->
 
-## 🔴 A cópia tem MÃO ÚNICA (lei do dono, 16/09/2026)
+## 🔴 A cópia tem MÃO ÚNICA — e o pacote NÃO vira o SaaS do avesso
 
-*"Em hipótese nenhuma modificar o SaaS por causa de nenhum outro sistema, sempre o contrário: os
-outros sistemas copiam o SaaS Gestão e vão herdar a aparência e funções dele."*
+*"Os outros sistemas copiam o SaaS Gestão e vão herdar a aparência e funções dele."* (dono, 16/09/2026)
 
-- Peça nova aqui **nasce copiando o SaaS** e é adotada pelos OUTROS produtos.
-- **Nunca** se mexe no `saas-gestao` para servir a este pacote, nem "só para ficar igual", nem com
-  teste verde e pré-visualização. O SaaS adota quando o dono quiser, como trabalho DELE.
-- Mudança de pacote que **exigiria** editar o SaaS para valer está errada por construção: refaça a
-  peça para que o SaaS continue como está.
+🔴 **O que esta regra está respondendo** (dono, 01/10/2026, corrigindo a redação anterior — ela dizia
+*"em hipótese nenhuma"* e *"nunca"*): *"nunca mexer é muito forte… vamos atualizar sim, é a evolução
+do sistema; coloquei esse nunca mexer pq alguém alterou o sistema todo por acidente uma vez e fiquei
+muito preocupado e assustado"*.
+
+**Então ela não proíbe evoluir — ela proíbe mudar o sistema inteiro sem ninguém ver.** Atualizar o
+pacote nos produtos é trabalho normal e desejado.
+
+- **Direção:** peça nova **nasce copiando o SaaS** e é adotada pelos OUTROS produtos. O SaaS não se
+  adapta ao pacote: quando o pacote diverge, **quem se conserta é o pacote**.
+- 🔴 **Antes de subir o pacote num produto, meça o RAIO** — quantas telas daquele produto mudam, e
+  quais. Regra de CSS do núcleo é a arma do susto: uma declaração mexe em todas as telas de uma vez.
+  **Exemplo medido (01/10/2026):** a v0.9.2 trocou `margin: 0 0 18px` por `0 auto 18px` no
+  `.cabecalho-pagina` — correto para filho direto do `.painel-main`, e mesmo assim **encolheria 19 das
+  75 telas do saas-gestao**, onde o pai é flex-coluna. O conserto saiu aqui (`width: 100%`, v0.9.4),
+  não lá.
+- **Mudança de pacote que exigiria editar o produto para valer está errada por construção:** refaça a
+  peça aqui para que o produto continue como está.
+- **O número medido vai na mensagem do commit**, para a próxima versão saber o que olhar.

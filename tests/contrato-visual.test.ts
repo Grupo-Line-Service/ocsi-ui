@@ -95,3 +95,22 @@ it("o .cabecalho-pagina centraliza (margin auto), não encosta à esquerda", () 
   expect(margin, ".cabecalho-pagina tem margin").not.toBe(null);
   expect(/\bauto\b/.test(margin![1]), `margin deve ter 'auto' (é "${margin?.[1]}")`).toBe(true);
 });
+
+/*
+ * 🔴 O PAR DO TESTE ACIMA, e ele existe por um defeito MEDIDO (01/10/2026).
+ * Margem automática no eixo horizontal CANCELA o `stretch` quando o pai é
+ * flex-coluna ou grid: o filho encolhe para a largura do conteúdo. O teste de
+ * cima pede `auto`; sozinho, ele EXIGE o defeito. No saas-gestao isso encolheria
+ * 19 das 75 telas que usam a faixa — e nenhum produto perceberia, porque a
+ * centralização continua certa onde há `max-width`.
+ * `width: 100%` faz as duas coisas conviverem, então ele é contrato, não detalhe.
+ */
+it("o .cabecalho-pagina preenche o pai (width 100%), senão o 'auto' o encolhe em flex/grid", () => {
+  const shell = readFileSync(join(raiz, "css/shell.css"), "utf8");
+  const m = shell.match(/\.cabecalho-pagina\s*\{[\s\S]*?\}/);
+  expect(m, "achou o .cabecalho-pagina").not.toBe(null);
+  const semComentario = m![0].replace(/\/\*[\s\S]*?\*\//g, "");
+  const largura = semComentario.match(/(?:^|[;{])\s*width:\s*([^;]+);/);
+  expect(largura, ".cabecalho-pagina declara width").not.toBe(null);
+  expect(largura![1].trim(), "width deve ser 100%").toBe("100%");
+});

@@ -157,6 +157,15 @@
   flex-wrap: wrap;
   padding: 18px 22px;
   margin: 0 auto 18px;
+  /* 🔴 O `auto` acima centraliza o cabeçalho como filho direto do `.painel-main`
+     (que dá `max-width: 1480px` + margem automática a todo filho). Mas margem
+     automática no eixo horizontal CANCELA o `stretch` quando o pai é flex-coluna
+     ou grid: o cabeçalho encolhe para a largura do conteúdo e vai para o meio.
+     MEDIDO no saas-gestao em 01/10/2026: 19 das 75 telas que usam a faixa ficam
+     dentro de um `flex-direction: column`, e as 19 encolheriam de uma vez.
+     `width: 100%` resolve sem desfazer a v0.9.2: onde há `max-width`, ele limita
+     e o `auto` continua centralizando; onde não há, a faixa só preenche o pai. */
+  width: 100%;
   border: 1px solid var(--border);
   border-radius: 16px;
   background: var(--surface);
