@@ -162,6 +162,15 @@ issue existir. Conferir só o que já foi commitado é conferir o passado.
 | Execução / tarefa | Linear (Iniciativa → Projeto → Issue) |
 | Código | GitHub, commit explicando **por quê** |
 
+🔴 **O diário é UM ARQUIVO POR DIA** (padrão da casa, dono 25/10/2026). O que aconteceu, o que foi
+medido, a correção vão em **`docs/diario/AAAA-MM-DD.md`** — **crie o do dia se não existir** —, NÃO no
+`CLAUDE.md` (que é regra, não história). Cada sessão escreve a sua seção com `## título do assunto`, e **a
+linha em branco antes do cabeçalho não é opcional**: sem ela o Markdown não vê o cabeçalho e o `git diff`
+não mostra. Um arquivo por dia (não por mês) **separa quem escreve ao mesmo tempo** — quatro sessões num
+mensal travaram quatro PRs num único dia (SaaS, 03-04/10/2026; a causa é CONCORRÊNCIA, não tamanho).
+Esquema inteiro, com o verificador:
+[`DIARIO_STANDARD.md`](https://github.com/Grupo-Line-Service/ocsi-framework/blob/main/docs/governance/DIARIO_STANDARD.md).
+
 ### 5. Onde cada SEGREDO mora — decide QUEM CONSOME, não que tipo é
 
 Antes de guardar uma credencial, não pergunte "que tipo de segredo é este". Pergunte
