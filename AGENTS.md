@@ -156,7 +156,7 @@ issue existir. Conferir só o que já foi commitado é conferir o passado.
 
 Quando este repositório é operado por uma das **sessões Remote Control do VM
 `noc-agente`** (equipes: `noc-agente`=infra-propria · `saas-gestao` ·
-`noc-monitoramento`=rede-monitoramento · `omnivis`=~/dev), elas são **isoladas**:
+`noc-monitoramento`=rede-monitoramento · `omnivis`=~/dev · `jatoba-pop`=~/dev/jatoba-pop), elas são **isoladas**:
 não se falam direto, só dividem disco/git. Para saber o que cada uma faz — e
 **não duplicar** (§3):
 
