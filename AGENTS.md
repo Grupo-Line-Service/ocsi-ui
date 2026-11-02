@@ -152,6 +152,24 @@ minutos**. "Commits recentes" não enxergava nenhum dos três — e no mesmo dia
 **dois números de issue colidiram**, escritos em quatro arquivos antes de a
 issue existir. Conferir só o que já foi commitado é conferir o passado.
 
+### 3.1 Coordenação entre as equipes do VM (quando houver sessões RC no mesmo VM)
+
+Quando este repositório é operado por uma das **sessões Remote Control do VM
+`noc-agente`** (equipes: `noc-agente`=infra-propria · `saas-gestao` ·
+`noc-monitoramento`=rede-monitoramento · `omnivis`=~/dev), elas são **isoladas**:
+não se falam direto, só dividem disco/git. Para saber o que cada uma faz — e
+**não duplicar** (§3):
+
+- **Ao acordar / a cada prompt:** `~/dev/infra-propria/vm-coordenacao/bin/painel`
+  (quadro de evolução) e `~/dev/infra-propria/vm-coordenacao/bin/caixa` (recados
+  novos) aparecem pelos hooks — **leia ANTES de agir**.
+- **Começou/terminou uma frente:** `painel "frente X: ..."`.
+- **Resultado que afeta outra equipe:** `recado <equipe> "..."`.
+
+Fora do VM (sem essas ferramentas) este item é **inerte**. Decisão durável e
+auditável continua em Linear/Notion/PR — o painel é o retrato de onde o processo
+está, não o registro. Ferramenta e doc: `infra-propria/vm-coordenacao/README.md`.
+
 ### 4. Onde cada coisa é registrada
 
 | O quê | Onde |
